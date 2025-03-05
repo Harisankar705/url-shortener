@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: url-shortener-app
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+      - redis
+    env_file:
+      - .env  
+
+  mongodb:
+    image: mongo:latest
+    container_name: url-shortener-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:latest
+    container_name: url-shortener-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  mongo_data:
