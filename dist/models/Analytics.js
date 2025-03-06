@@ -1,6 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { IAnalytics } from '../interfaces.js';
-const AnalyticsSchema = new Schema<IAnalytics>({
+import mongoose, { Schema } from 'mongoose';
+const AnalyticsSchema = new Schema({
     shortUrl: { type: String, required: true },
     ip: { type: String, required: true },
     userAgent: { type: String, required: true },
@@ -8,5 +7,5 @@ const AnalyticsSchema = new Schema<IAnalytics>({
     osType: { type: String, required: true },
     location: { type: Object },
     timestamp: { type: Date, default: Date.now },
-  });
-export default mongoose.model<IAnalytics>('Analytics', AnalyticsSchema);
+});
+export default mongoose.model('Analytics', AnalyticsSchema);

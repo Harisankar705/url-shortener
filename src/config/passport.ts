@@ -1,7 +1,7 @@
-import UserModel from "../models/User"
+import UserModel from "../models/User.js"
 import {GoogleCallbackParameters, Strategy as GoogleStrategy,Profile} from 'passport-google-oauth20'
 import passport, { DoneCallback } from 'passport'; 
-import { IUser } from "../interfaces";
+import { IUser } from "../interfaces.js";
 import { Request } from "express";
 
 passport.use(new GoogleStrategy({

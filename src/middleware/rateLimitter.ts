@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { RateLimiterMemory } from "rate-limiter-flexible";
-import { STATUS_CODES } from "../utils/statusCode";
+import { STATUS_CODES } from "../utils/statusCode.js";
 const rateLimiter=new RateLimiterMemory({
     points:5,
     duration:60

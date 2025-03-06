@@ -1,5 +1,5 @@
 import mongoose, { mongo, Schema } from "mongoose";
-import { IUser } from "../interfaces";
+import { IUser } from "../interfaces.js";
 const userSchema=new Schema<IUser>({
     googleId:{type:String,required:true},
     name:String,

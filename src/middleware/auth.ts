@@ -1,7 +1,7 @@
 import jwt, { JwtPayload, VerifyErrors } from 'jsonwebtoken'
 import {Request,Response,NextFunction} from 'express'
-import { IDecodedUser, IError, IUser } from '../interfaces'
-import { STATUS_CODES } from '../utils/statusCode'
+import {IUser } from '../interfaces.js'
+import { STATUS_CODES } from '../utils/statusCode.js'
 const authMiddleware=(req:Request,res:Response,next:NextFunction):void=>{
 const authHeader=req.headers.authorization
 if(authHeader)
