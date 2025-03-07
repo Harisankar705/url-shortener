@@ -5,10 +5,8 @@ import mongoose from 'mongoose';
 import redis from "../cache/redisClient.js"; 
 import redisClient from "../cache/redisClient.js"; 
 
-// Increase Jest timeout to avoid long-running test failures
 jest.setTimeout(150000);
 
-// Mock authentication middleware to bypass real authentication
 jest.mock('../middleware/auth', () => ({
     verifyToken: (req: Request, res: Response, next: NextFunction) => {
         req.user = { id: 'testUserId', email: 'test@example.com' }; 
@@ -16,7 +14,7 @@ jest.mock('../middleware/auth', () => ({
     }
 }));
 beforeAll(async () => {
-    await redisClient.flushall(); // Clears Redis data before tests
+    await redisClient.flushall(); 
   });
   
 describe('URL Shortening', () => {
@@ -33,7 +31,6 @@ describe('URL Shortening', () => {
     });
 
     it('should redirect to the original URL', async () => {
-        // Step 1: First, create a short URL dynamically
         const longUrl = 'https://example.com';
         const shortenRes = await request(app)
             .post('/api/urls/shorten')
@@ -43,17 +40,15 @@ describe('URL Shortening', () => {
         expect(shortenRes.status).toBe(201);
         expect(shortenRes.body).toHaveProperty('shortUrl');
 
-        const alias = shortenRes.body.shortUrl; // Get dynamically generated alias
+        const alias = shortenRes.body.shortUrl; 
 
-        // Step 2: Now test redirection using the alias
         const res = await request(app).get(`/api/urls/shorten/${alias}`);
 
         expect(res.status).toBe(302);
-        expect(res.header.location).toBe(longUrl); // Use the original URL dynamically
+        expect(res.header.location).toBe(longUrl); 
     });
 
     it('should get analytics for a specific URL', async () => {
-        // Step 1: Create a short URL first
         const longUrl = 'https://example.com';
         const shortenRes = await request(app)
             .post('/api/urls/shorten')
@@ -92,6 +87,6 @@ describe('Analytics', () => {
 });
 afterAll(async () => {
     await mongoose.connection.close();
-    await redis.quit(); // Ensure Redis connection is closed
+    await redis.quit();
   });
   
