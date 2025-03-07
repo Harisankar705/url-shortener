@@ -7,3 +7,4 @@ urlRoutes.post('/shorten',rateLimiterMiddleware,createURL)
 urlRoutes.get('/shorten/:alias', redirectShortUrl);
 urlRoutes.get('/analytics/:alias',getAnalytics);
 urlRoutes.get('/:alias',cached);
+

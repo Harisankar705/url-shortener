@@ -8,10 +8,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { createClient } from 'redis';
-const redisClient = createClient();
-redisClient.on('error', (err) => console.error('Redis Error:', err));
+import dotenv from 'dotenv';
+dotenv.config();
+const redisClient = createClient({
+    socket: {
+        host: process.env.REDIS_HOST || "url-shortener-redis",
+        port: Number(process.env.REDIS_PORT) || 6379,
+        reconnectStrategy: (retries) => {
+            console.log(`🔄 Redis reconnect attempt: ${retries}`);
+            return Math.min(retries * 100, 3000);
+        },
+    },
+});
+// Error handling
+redisClient.on('error', (err) => console.error('❌ Redis Error:', err));
+redisClient.on('connect', () => console.log('✅ Connected to Redis'));
+redisClient.on('reconnecting', () => console.log('🔄 Reconnecting to Redis...'));
+// Connect to Redis
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    yield redisClient.connect();
-    console.log('Connected to Redis');
+    try {
+        yield redisClient.connect();
+        console.log('✅ Redis client connection established successfully');
+    }
+    catch (err) {
+        console.error('❌ Redis connection failed:', err);
+    }
 }))();
 export default redisClient;

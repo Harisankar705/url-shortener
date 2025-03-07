@@ -4,6 +4,7 @@
     "paths": {
       "*": ["*", "src/*"]
     },
+    "types":["jest","node"],
     "outDir": "dist",  
     "rootDir": "src",
     "target": "es2016",
@@ -17,8 +18,8 @@
     "resolveJsonModule": true,
     "lib": [
       "dom",
-      "es2015.promise",
-      "es5"
+      "es2015",
+      "es2016"
     ]
   },
   "include": ["src/**/*"],

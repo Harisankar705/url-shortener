@@ -8,4 +8,5 @@ const AnalyticsSchema = new Schema({
     location: { type: Object },
     timestamp: { type: Date, default: Date.now },
 });
-export default mongoose.model('Analytics', AnalyticsSchema);
+const AnalyticsModel = mongoose.model('Analytics', AnalyticsSchema);
+export default AnalyticsModel;

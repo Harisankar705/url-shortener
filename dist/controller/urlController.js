@@ -11,7 +11,7 @@ import { STATUS_CODES } from "../utils/statusCode.js";
 import UrlModel from "../models/Url.js";
 import { nanoid } from "nanoid";
 import axios from "axios";
-import AnalyticsModel from '../models/Analytics.js';
+import AnalyticsModel from '../models/analytics.js';
 import useragent from 'useragent';
 import redis from "../cache/redisClient.js";
 export const createURL = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -57,7 +57,7 @@ export const createURL = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 export const redirectShortUrl = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { alias } = req.params;
-    console.log(`🟢 Incoming request for alias: ${alias}`); // Log the alias  
+    console.log(`🟢 Incoming request for alias: ${alias}`);
     const ip = req.ip || req.headers['x-forwarded-for'] || 'Unknown';
     const userAgentString = req.headers['user-agent'] || 'Unknown';
     try {

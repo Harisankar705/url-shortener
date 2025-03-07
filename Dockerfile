@@ -8,17 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy all source files into the container
 COPY . .
 
-# Build TypeScript files
 RUN npm run build
 
-# Ensure dist folder is included
 RUN ls -l dist
 
-# Expose the correct port
-EXPOSE 5000
+EXPOSE 4444
 
 # Start the application
 CMD ["node", "dist/index.js"]

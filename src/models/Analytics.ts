@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { IAnalytics } from '../interfaces.js';
 const AnalyticsSchema = new Schema<IAnalytics>({
     shortUrl: { type: String, required: true },
@@ -9,4 +9,5 @@ const AnalyticsSchema = new Schema<IAnalytics>({
     location: { type: Object },
     timestamp: { type: Date, default: Date.now },
   });
-export default mongoose.model<IAnalytics>('Analytics', AnalyticsSchema);
+const AnalyticsModel= mongoose.model<IAnalytics>('Analytics', AnalyticsSchema);
+export default AnalyticsModel

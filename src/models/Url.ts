@@ -4,8 +4,10 @@ export interface IUrl extends Document{
     shortUrl:string,
     customAlias?:string,
     topic?:string,
-    clicks?:string
+    clicks?:number
     createdAt:Date
+    uniqueUsers?: string[]; 
+
 }
 const urlSchema=new Schema<IUrl>({
     longUrl:{type:String,required:true},
