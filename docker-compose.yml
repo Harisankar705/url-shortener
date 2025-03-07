@@ -11,9 +11,9 @@ services:
     env_file:
       - .env  
     environment:
-      - REDIS_HOST=url-shortener-redis  # 👈 Set Redis host in ENV
+      - REDIS_HOST=url-shortener-redis  
     networks:
-      - app-network  # 👈 Use a shared network
+      - app-network  
 
   redis:
     image: redis:latest
@@ -22,10 +22,10 @@ services:
     ports:
       - "6379:6379"
     networks:
-      - app-network  # 👈 Use the same network
+      - app-network  
 
 networks:
-  app-network:  # 👈 Define the shared network
+  app-network:  
     driver: bridge
 
 volumes:
