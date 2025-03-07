@@ -1,4 +1,4 @@
-import authMiddleware from 'src/middleware/auth.js';
+import authMiddleware from '../middleware/auth.js';
 import { Router } from "express";
 import { rateLimiterMiddleware } from "../middleware/rateLimitter.js";
 import { cached, createURL, getAnalytics, redirectShortUrl } from "../controller/urlController.js";

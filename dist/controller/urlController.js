@@ -11,7 +11,7 @@ import { STATUS_CODES } from "../utils/statusCode.js";
 import UrlModel from "../models/Url.js";
 import { nanoid } from "nanoid";
 import axios from "axios";
-import AnalyticsModel from '../models/analytics.js';
+import AnalyticsModel from '../models/Analytics.js';
 import useragent from 'useragent';
 import redis from "../cache/redisClient.js";
 export const createURL = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

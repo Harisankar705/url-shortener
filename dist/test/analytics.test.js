@@ -12,9 +12,7 @@ import request from 'supertest';
 import mongoose from 'mongoose';
 import redis from "../cache/redisClient.js";
 import redisClient from "../cache/redisClient.js";
-// Increase Jest timeout to avoid long-running test failures
 jest.setTimeout(150000);
-// Mock authentication middleware to bypass real authentication
 jest.mock('../middleware/auth', () => ({
     verifyToken: (req, res, next) => {
         req.user = { id: 'testUserId', email: 'test@example.com' };
@@ -22,7 +20,7 @@ jest.mock('../middleware/auth', () => ({
     }
 }));
 beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield redisClient.flushall(); // Clears Redis data before tests
+    yield redisClient.flushall();
 }));
 describe('URL Shortening', () => {
     let token = 'mocked-token';
@@ -35,7 +33,6 @@ describe('URL Shortening', () => {
         expect(res.body).toHaveProperty('shortUrl');
     }));
     it('should redirect to the original URL', () => __awaiter(void 0, void 0, void 0, function* () {
-        // Step 1: First, create a short URL dynamically
         const longUrl = 'https://example.com';
         const shortenRes = yield request(app)
             .post('/api/urls/shorten')
@@ -43,14 +40,12 @@ describe('URL Shortening', () => {
             .send({ longUrl, topic: 'acquisition' });
         expect(shortenRes.status).toBe(201);
         expect(shortenRes.body).toHaveProperty('shortUrl');
-        const alias = shortenRes.body.shortUrl; // Get dynamically generated alias
-        // Step 2: Now test redirection using the alias
+        const alias = shortenRes.body.shortUrl;
         const res = yield request(app).get(`/api/urls/shorten/${alias}`);
         expect(res.status).toBe(302);
-        expect(res.header.location).toBe(longUrl); // Use the original URL dynamically
+        expect(res.header.location).toBe(longUrl);
     }));
     it('should get analytics for a specific URL', () => __awaiter(void 0, void 0, void 0, function* () {
-        // Step 1: Create a short URL first
         const longUrl = 'https://example.com';
         const shortenRes = yield request(app)
             .post('/api/urls/shorten')
@@ -82,5 +77,5 @@ describe('Analytics', () => {
 });
 afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
     yield mongoose.connection.close();
-    yield redis.quit(); // Ensure Redis connection is closed
+    yield redis.quit();
 }));
