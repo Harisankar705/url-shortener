@@ -11,7 +11,7 @@ services:
     env_file:
       - .env  
     environment:
-      - REDIS_HOST=url-shortener-redis  
+      -  REDIS_HOST=redis
     networks:
       - app-network  
 
