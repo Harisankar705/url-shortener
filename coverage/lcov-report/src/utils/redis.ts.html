@@ -134,7 +134,7 @@
 &nbsp;
 const redisClient = <span class="cstat-no" title="statement not covered" >createClient({</span>
     socket: {
-        host: process.env.REDIS_HOST || "url-shortener-redis",
+        host: process.env.REDIS_HOST || 'redis',
         port: Number(process.env.REDIS_PORT) || 6379, 
         reconnectStrategy: <span class="fstat-no" title="function not covered" >(r</span>etries) =&gt; {
 <span class="cstat-no" title="statement not covered" >            console.log(`🔄 Redis reconnect attempt: ${retries}`);</span>
